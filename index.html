@@ -1,9 +1,162 @@
-<h1>JavaScript Objectball</h1>
-<p>
-  Open your Chrome dev tools to see console output and trigger the debugger to
-  catch.
-</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Objectball</title>
+</head>
+<body>
+  <h1>JavaScript Objectball</h1>
+  <p>
+    Open your Chrome dev tools to see console output and trigger the debugger to
+    catch.
+  </p>
 
-<script src="./src/00-objectball.js"></script>
-<script src="./src/01-simple-debug.js"></script>
-<!-- <script src="./src/02-advanced-debug.js"></script> -->
+  <script src="./src/00-objectball.js"></script>
+  <script src="./src/01-simple-debug.js"></script>
+  <!-- <script src="./src/02-advanced-debug.js"></script> -->
+
+  <script>
+    function getObject() {
+      return {
+        home: {
+          teamName: 'Brooklyn Nets',
+          colors: ['Black', 'White'],
+          players: {
+            'Alan Anderson': {
+              number: 0,
+              shoe: 16,
+              points: 22,
+              rebounds: 12,
+              assists: 12,
+              steals: 3,
+              blocks: 1,
+              slamDunks: 1
+            },
+            'Reggie Evans': {
+              number: 30,
+              shoe: 14,
+              points: 12,
+              rebounds: 12,
+              assists: 12,
+              steals: 12,
+              blocks: 12,
+              slamDunks: 7
+            },
+            'Brook Lopez': {
+              number: 11,
+              shoe: 17,
+              points: 17,
+              rebounds: 19,
+              assists: 10,
+              steals: 3,
+              blocks: 1,
+              slamDunks: 15
+            },
+            'Jason Terry': {
+              number: 31,
+              shoe: 15,
+              points: 19,
+              rebounds: 2,
+              assists: 2,
+              steals: 4,
+              blocks: 11,
+              slamDunks: 1
+            }
+          }
+        },
+        away: {
+          teamName: 'Charlotte Hornets',
+          colors: ['Turquoise', 'Purple'],
+          players: {
+            'Jeff Adrien': {
+              number: 4,
+              shoe: 18,
+              points: 10,
+              rebounds: 1,
+              assists: 1,
+              steals: 2,
+              blocks: 7,
+              slamDunks: 2
+            },
+            'Bismak Biyombo': {
+              number: 0,
+              shoe: 16,
+              points: 12,
+              rebounds: 4,
+              assists: 7,
+              steals: 7,
+              blocks: 15,
+              slamDunks: 10
+            },
+            'DeSagna Diop': {
+              number: 2,
+              shoe: 14,
+              points: 24,
+              rebounds: 12,
+              assists: 12,
+              steals: 4,
+              blocks: 5,
+              slamDunks: 5
+            },
+            'Ben Gordon': {
+              number: 8,
+              shoe: 15,
+              points: 33,
+              rebounds: 3,
+              assists: 2,
+              steals: 1,
+              blocks: 1,
+              slamDunks: 0
+            },
+            'Brendan Haywood': {
+              number: 33,
+              shoe: 15,
+              points: 6,
+              rebounds: 12,
+              assists: 12,
+              steals: 22,
+              blocks: 5,
+              slamDunks: 12
+            }
+          }
+        }
+      };
+    }
+
+    
+    console.log(getObject());
+    console.log(getObject().home.players);
+    console.log(getObject().away.players);
+
+    function numPointsScored(playerName){
+      return getObject().home.players[playerName].points || getObject().away.players[playerName].points;
+    
+
+    }
+    function shoeSize(playerName){
+      return getObject().home.players[playerName].shoe || getObject().away.players[playerName].shoe;
+
+    }
+    function teamColors(teamName){
+      return getObject().home.teamName === teamName ? getObject().home.colors : getObject().away.colors;
+    }
+    function teamNames(){
+      return [getObject().home.teamName, getObject().away.teamName];
+    }
+    function playerNumbers(teamName){
+      return getObject().home.teamName === teamName ? Object.values(getObject().home.players).map(player => player.number) : Object.values(getObject().away.players).map(player => player.number);
+    }
+    function playerStats(playerName){
+      return getObject().home.players[playerName] || getObject().away.players[playerName];
+    }
+    function bigShoeRebounds(){
+      let players = Object.values(getObject().home.players).concat(Object.values(getObject().away.players));
+      let player = players.reduce((acc, player) => {
+        return player.shoe > acc.shoe ? player : acc;
+      });
+      return player.rebounds;
+    }
+    console.log(numPointsScored('Alan Anderson'));
+  </script>
+</body>
+</html>
